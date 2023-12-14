@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 
 class AppbarWidget extends StatelessWidget {
@@ -28,7 +28,7 @@ class AppbarWidget extends StatelessWidget {
           , icon: Icon(icon,size: 20,),color: Colors.brown,
           ),
         ),
-        Text(title,style: TextStyle(
+        Text(title,style: const TextStyle(
             color: Colors.black,
             fontWeight: FontWeight.bold,
           fontSize: 17
@@ -42,7 +42,7 @@ class AppbarWidget extends StatelessWidget {
           ),
           child: IconButton(onPressed: (){
 
-          }, icon: Icon(Icons.shopping_cart_outlined,size: 20,),color: Colors.brown,),
+          }, icon: const Icon(Icons.shopping_cart_outlined,size: 20,),color: Colors.brown,),
         )
       ],
     );

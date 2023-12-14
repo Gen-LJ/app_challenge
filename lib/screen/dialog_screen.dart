@@ -1,16 +1,19 @@
 
+import 'package:app_challenge/api/firestore/firestore.dart';
 import 'package:app_challenge/screen/report_screen.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class DialogScreen extends StatefulWidget {
-  const DialogScreen({Key? key}) : super(key: key);
+  const DialogScreen({Key? key, this.price}) : super(key: key);
+  final price;
 
   @override
   State<DialogScreen> createState() => _DialogScreenState();
 }
 
 class _DialogScreenState extends State<DialogScreen> {
+
+  final FireStoreService fireStoreService = FireStoreService();
   final GlobalKey<FormState> _formKey = GlobalKey();
   String? _name,_phNumber,_address;
 
@@ -31,12 +34,12 @@ class _DialogScreenState extends State<DialogScreen> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Name'),
-              SizedBox(height: 10,),
+              const Text('Name'),
+              const SizedBox(height: 10,),
               Container(
                 height: 45,
                 decoration: BoxDecoration(
-                    color: CupertinoColors.lightBackgroundGray,
+                    color: Colors.grey.withOpacity(0.2),
                     borderRadius: BorderRadius.circular(6)
                 ),
                 child: TextFormField(
@@ -56,13 +59,13 @@ class _DialogScreenState extends State<DialogScreen> {
                   ),
                 ),
               ),
-              SizedBox(height: 20,),
-              Text('Phone No'),
-              SizedBox(height: 10,),
+              const SizedBox(height: 20,),
+              const Text('Phone No'),
+              const SizedBox(height: 10,),
               Container(
                 height: 45,
                 decoration: BoxDecoration(
-                    color: CupertinoColors.lightBackgroundGray,
+                    color: Colors.grey.withOpacity(0.2),
                     borderRadius: BorderRadius.circular(6)
                 ),
                 child: TextFormField(
@@ -84,13 +87,13 @@ class _DialogScreenState extends State<DialogScreen> {
                   ),
                 ),
               ),
-              SizedBox(height: 20,),
-              Text('Address'),
-              SizedBox(height: 10,),
+              const SizedBox(height: 20,),
+              const Text('Address'),
+              const SizedBox(height: 10,),
               Container(
                 height: 120,
                 decoration: BoxDecoration(
-                    color: CupertinoColors.lightBackgroundGray,
+                    color: Colors.grey.withOpacity(0.2),
                     borderRadius: BorderRadius.circular(6)
                 ),
                 child: TextFormField(
@@ -112,7 +115,7 @@ class _DialogScreenState extends State<DialogScreen> {
                     )
                 ),
               ),
-              SizedBox(height: 10,),
+              const SizedBox(height: 10,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -127,18 +130,15 @@ class _DialogScreenState extends State<DialogScreen> {
                       onPressed: (){
                     _formKey.currentState?.save();
                     if(_formKey.currentState?.validate() ?? false){
-                      //DateTime now= DateTime.now();
-                      //int? cost =int.tryParse(_cost!);
                       if(_phNumber != null || _name != null || _address != null) {
-                        //databaseProvider.expenseDatabaseHelper.insertExpense(name: _name!, cost: cost!, time: now.toString(), category: _category!);
+                        fireStoreService.addProduct(_name!, widget.price, _phNumber!, _address!);
                         if(mounted){
-                          //Navigator.pop(context,'inserted');
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=> ReportScreen()));
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=> const ReportScreen()));
                           ScaffoldMessenger.of(context)
-                              .showSnackBar(const SnackBar(content: Text('Successfully saved')));
+                              .showSnackBar(const SnackBar(content: Text('Successfully Ordered')));
                         }
                       }
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=> ReportScreen()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=> const ReportScreen()));
                     }
 
                   },

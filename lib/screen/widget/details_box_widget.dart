@@ -40,7 +40,7 @@ class DetailsBoxWidget extends StatelessWidget {
                       width: 22,
                       height: 22,
                     ),
-                    SizedBox(width: 6,),
+                    const SizedBox(width: 6,),
                     Container(
                       decoration: BoxDecoration(
                           color: Colors.orange.withOpacity(0.5),
@@ -49,7 +49,7 @@ class DetailsBoxWidget extends StatelessWidget {
                       width: 22,
                       height: 22,
                     ),
-                    SizedBox(width: 6,),
+                    const SizedBox(width: 6,),
                     Container(
                       decoration: BoxDecoration(
                           color: Colors.indigo.withOpacity(0.8),
@@ -59,7 +59,7 @@ class DetailsBoxWidget extends StatelessWidget {
                       height: 22,
 
                     ),
-                    SizedBox(width: 6,),
+                    const SizedBox(width: 6,),
                     Container(
                       decoration: BoxDecoration(
                           color: Colors.purple.withOpacity(0.7),
@@ -72,20 +72,20 @@ class DetailsBoxWidget extends StatelessWidget {
                   ],
                 )
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Text(productModel.name ?? '',
-              style: TextStyle(
+              style: const TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.bold
               ),),
-            SizedBox(height: 6,),
+            const SizedBox(height: 6,),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(productModel.productType  ?? '',
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: Colors.grey,
                       fontSize: 12
                   ),),
@@ -94,31 +94,31 @@ class DetailsBoxWidget extends StatelessWidget {
                 )
               ],
             ),
-            SizedBox(height: 20,),
+            const SizedBox(height: 20,),
             Container(
                 height: 85,
                 //color: Colors.red,
                 child: SingleChildScrollView
                   (child: Text(productModel.description ?? '',
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: Colors.grey,
                       fontSize: 12
                   ),))),
-            SizedBox(height: 20,),
+            const SizedBox(height: 20,),
             Divider(color: Colors.pink.withOpacity(0.5),
               indent: 40,
               endIndent: 40,
               thickness: 1,),
-            SizedBox(height: 10,),
+            const SizedBox(height: 10,),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('\$${productModel.price}',style: TextStyle(
+                Text('\$${productModel.price}',style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 18
                 ),
                 ),
-                SizedBox(width: 30,),
+                const SizedBox(width: 30,),
                 Container(
                   width: 80,height: 25,
                   decoration: BoxDecoration(
@@ -127,7 +127,7 @@ class DetailsBoxWidget extends StatelessWidget {
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(10)
                   ),
-                  child: Row(
+                  child: const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       SizedBox(width: 2,),
@@ -154,11 +154,11 @@ class DetailsBoxWidget extends StatelessWidget {
                       onPressed:(){
                       showDialog(context: context, builder: (context){
                         return AlertDialog(
-                          title: Text('            Delivery Info'),
-                          content: DialogScreen(),
+                          title: const Text('            Delivery Info'),
+                          content: DialogScreen(price: productModel.price,),
                         );
                       });
-                      }, child: Text('Cart')),
+                      }, child: const Text('Cart')),
                 )
 
               ],

@@ -1,12 +1,10 @@
-import 'package:app_challenge/api/model/ProductModel.dart';
+
 import 'package:app_challenge/provider/get_all_product/all_product_notifier.dart';
-import 'package:app_challenge/provider/get_all_product/all_product_state.dart';
-import 'package:app_challenge/screen/details_screen.dart';
+
 import 'package:app_challenge/screen/report_screen.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:app_challenge/screen/widget/product_grid_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import 'widget/app_bar_widget.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -20,7 +18,9 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-     Provider.of<ProductNotifer>(context,listen: false).getAllProduct();
+     Future((){
+       Provider.of<ProductNotifer>(context,listen: false).getAllProduct();
+     });
   }
   @override
   Widget build(BuildContext context) {
@@ -32,13 +32,13 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               AppbarWidget(title: 'Maybelline',icon: Icons.assignment,
                 function: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context)=> ReportScreen()));
+                Navigator.push(context, MaterialPageRoute(builder: (context)=> const ReportScreen()));
                 },),
-              SizedBox(height: 20,),
+              const SizedBox(height: 20,),
               Container(
                 height: 45,
                 decoration: BoxDecoration(
-                    color: CupertinoColors.lightBackgroundGray,
+                    color: Colors.grey.withOpacity(0.2),
                     borderRadius: BorderRadius.circular(6)
                 ),
                 child: Padding(
@@ -51,121 +51,17 @@ class _HomeScreenState extends State<HomeScreen> {
                             borderSide: BorderSide.none
                         ),
                         hintText: 'Search the products...',
-                        hintStyle: TextStyle(
+                        hintStyle: const TextStyle(
                             fontSize: 14
                         ),
-                        suffixIcon: Icon(Icons.search)
+                        suffixIcon: const Icon(Icons.search)
                     ),
 
                   ),
                 ),
               ),
-              SizedBox(height: 20,),
-              Expanded(
-                child: Consumer<ProductNotifer>(
-                  builder: (_,productProvider,__) {
-                    AllProductState allProductState = productProvider.allProductState;
-                    if(allProductState is SuccessState) {
-                      List<ProductModel> allProducts = allProductState.allProducts;
-                      return RefreshIndicator(
-                        onRefresh: () {
-                          return Provider.of<ProductNotifer>(context,listen: false).getAllProduct();
-                        },
-                        child: GridView.builder(
-                          scrollDirection: Axis.vertical,
-                          shrinkWrap: true,
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisSpacing: 20,
-                            mainAxisSpacing: 10,
-                            childAspectRatio: 1/1.5,
-                            crossAxisCount: 2),
-                        itemCount: allProducts.length,
-                        itemBuilder: (context,index){
-                          return InkWell(
-                            onTap: (){
-                              Navigator.push(context, MaterialPageRoute(
-                                  builder: (context)=> DetailScreen(productModel: allProducts[index])));
-                            },
-                            child: Column(
-                              children: [
-                                Container(
-                                  width: 200,
-                                  height: 150,
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(20),
-                                    topRight: Radius.circular(20)
-                                  ),
-                                  border: Border.all(color: Colors.pink.withOpacity(0.1))
-                                ),
-                                  child: Stack(
-                                    children: [
-                                      Positioned(
-                                        top :10,
-                                          right: 10,
-                                          left: 10,
-                                          bottom: 1,
-                                          child: Image.network(allProducts[index].imageLink ?? '',
-                                            width: 150,
-
-                                          ),
-                                      ),
-                                      Positioned(
-                                        top: 10,
-                                        right : 10,
-                                          child: Icon(Icons.favorite,color: Colors.red,size: 20,))
-                                    ],
-                                  ),
-                                ),
-                                Container(
-                                  width: 200,
-                                  height:80,
-                                decoration: BoxDecoration(
-                                    color: Colors.pinkAccent.withOpacity(0.1),
-                                  borderRadius: BorderRadius.only(
-                                    bottomLeft: Radius.circular(20),
-                                    bottomRight: Radius.circular(20)
-                                  )
-                                ),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text('${getFirstWords(allProducts[index].name ?? '', 2)} ...',
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold,color: Colors.brown
-                                  ),
-                                    ),
-                                    SizedBox(height: 5,),
-                                    Text(allProducts[index].productType ?? '',style:
-                                      TextStyle(
-                                        color: Colors.grey,
-                                        fontSize: 12
-                                      ),
-                                    ),
-                                    SizedBox(height: 5,),
-                                    Text(' \$ ${allProducts[index].price}',
-                                    style: TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold),)
-                                  ],
-                                ),
-
-                                ),
-                              ],
-                            ),
-                          );
-                        }),
-                      );
-                    }
-                    else if(allProductState is FailState){
-                      return Center(child: Text(allProductState.error),);
-                    }
-                    return Center(child: Text('Loading....'),);
-  }
-                ),
-              )
+              const SizedBox(height: 20,),
+              const ProductGridWidget()
             ],
           ),
         ),
@@ -173,7 +69,6 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
-
 
 
 

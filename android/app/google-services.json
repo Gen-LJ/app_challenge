@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "309863218987",
-    "project_id": "app-challenge-4eee4",
-    "storage_bucket": "app-challenge-4eee4.appspot.com"
+    "project_number": "223203932900",
+    "project_id": "app-challenge-mabelline",
+    "storage_bucket": "app-challenge-mabelline.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:309863218987:android:5cd468c8e648a1e4cccf6e",
+        "mobilesdk_app_id": "1:223203932900:android:234ce3c4fd0666bec0caf1",
         "android_client_info": {
           "package_name": "com.lj.app_challenge"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDUw7g4o58cRDr1aISLWX5gKMpJk8xcbUk"
+          "current_key": "AIzaSyCgkrCCZe9pyqU-dhQ2WghtG4Z3cLyQ2Lg"
         }
       ],
       "services": {
