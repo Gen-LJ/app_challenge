@@ -30,7 +30,7 @@ class ProductGridWidget extends StatelessWidget {
                     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisSpacing: 20,
                         mainAxisSpacing: 10,
-                        childAspectRatio: 1/1.5,
+                        childAspectRatio: 1/1.6,
                         crossAxisCount: 2),
                     itemCount: allProducts.length,
                     itemBuilder: (context,index){
@@ -73,7 +73,7 @@ class ProductGridWidget extends StatelessWidget {
                             ),
                             Container(
                               width: 200,
-                              height:80,
+                              height:100,
                               decoration: BoxDecoration(
                                   color: Colors.pinkAccent.withOpacity(0.1),
                                   borderRadius: const BorderRadius.only(
@@ -81,28 +81,33 @@ class ProductGridWidget extends StatelessWidget {
                                       bottomRight: Radius.circular(20)
                                   )
                               ),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text('${getFirstWords(allProducts[index].name ?? '', 2)} ...',
-                                    style: const TextStyle(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.bold,color: Colors.brown
+                              child: Padding(
+                                padding: const EdgeInsets.only(left: 5,right: 5),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  //crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Text('${getFirstWords(allProducts[index].name ?? '', 2)} ...',
+                                      style: const TextStyle(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.bold,color: Colors.brown
+                                      ),
                                     ),
-                                  ),
-                                  const SizedBox(height: 5,),
-                                  Text(allProducts[index].productType ?? '',style:
-                                  const TextStyle(
-                                      color: Colors.grey,
-                                      fontSize: 12
-                                  ),
-                                  ),
-                                  const SizedBox(height: 5,),
-                                  Text(' \$ ${allProducts[index].price}',
-                                    style: const TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold),)
-                                ],
+                                    const SizedBox(height: 5,),
+                                    Text(allProducts[index].productType ?? '',style:
+                                    const TextStyle(
+                                        color: Colors.grey,
+                                        fontSize: 12
+                                    ),
+                                    ),
+                                    const SizedBox(height: 5,),
+                                    Text(' \$ ${allProducts[index].price}',
+                                      style: const TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold),)
+
+                                  ],
+                                ),
                               ),
 
                             ),
